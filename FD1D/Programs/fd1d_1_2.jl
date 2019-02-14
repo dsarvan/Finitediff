@@ -7,11 +7,11 @@
 
 import PyPlot
 const plt = PyPlot
+plt.rc("text", usetex = "True")
 plt.rc("pgf", texsystem = "pdflatex")
 plt.rc("font", family = "serif", weight = "normal", size = 8)
 plt.rc("axes", labelsize = 10, titlesize = 10)
 plt.rc("figure", titlesize = 10)
-plt.rc("text", usetex = "True")
 using LaTeXStrings
 
 ke = 201
@@ -24,8 +24,8 @@ t0 = 40
 spread = 12
 nsteps = 100
 
-boundary_low = [0, 0]
-boundary_high = [0, 0]
+boundary_low = [0., 0.]
+boundary_high = [0., 0.]
 
 # desired points for plotting
 points = [
@@ -46,10 +46,10 @@ for time_step = 1:nsteps
     ex[kc] = exp(-0.5 * ((t0 - time_step) / spread)^2)
 
     # absorbing boundary conditions
-    #ex[1] = popfirst!(boundary_low)
-    #push!(boundary_low, ex[2])
-    #ex[ke - 1] = popfirst!(boundary_high)
-    #push!(boundary_high, ex[ke - 2])
+    ex[1] = popfirst!(boundary_low)
+    push!(boundary_low, ex[2])
+    ex[ke] = popfirst!(boundary_high)
+    push!(boundary_high, ex[ke - 1])
 
     # calculate the Hy field
     for k = 1:(ke-2)
@@ -69,12 +69,12 @@ fig = plt.figure(figsize=(8, 5.25))
 fig.suptitle(raw"FDTD simulation with absorbing boundary conditions")
 
 
-#function plotting(data, timestep, label)
+function plotting(data, timestep, label)
     """plot of E field at a single time step"""
     ax.plot(data, color="k", linewidth=1)
-    ax.set(xlim=(0, 200), ylim=(-0.2, 1.2), xlabel=r"{}".format(label), ylabel=r"E$_x$")
+    ax.set(xlim=(0, 200), ylim=(-0.2, 1.2), xlabel="label", ylabel=L"E$_x$")
     ax.set(xticks=0:20:200, yticks=0:1:1.2)
-    ax.text(100, 0.5, "T = {}".format(timestep), horizontalalignment="center")
+    ax.text(100, 0.5, "T = time", horizontalalignment="center")
 end
 
 
