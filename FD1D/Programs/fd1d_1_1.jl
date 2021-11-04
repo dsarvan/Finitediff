@@ -4,6 +4,8 @@
 # Date: 11/10/2021
 
 """ Simulation in free space """
+# FDTD simulation of a pulse in free space after 100 steps.
+# The pulse originated in the center and travels outward.
 
 import PyPlot
 const plt = PyPlot
@@ -36,7 +38,7 @@ for time_step = 1:nsteps
     ex[kc] = exp(-0.5 * ((t0 - time_step) / spread)^2)
 
     # calculate the Hy field
-    for k = 1:(ke-2)
+    for k = 1:(ke-1)
         hy[k] = hy[k] + 0.5 * (ex[k] - ex[k+1])
     end
 
@@ -49,7 +51,7 @@ ax1.text(100, 0.5, "T = $nsteps", horizontalalignment = "center")
 ax1.set(xlim = (0, 200), ylim = (-1.2, 1.2), ylabel = L"E$_x$")
 ax1.set(xticks = 0:20:200, yticks = -1:1:1.2)
 ax2.plot(hy, "k", lw = 1)
-ax2.set(xlim = (0, 200), ylim = (-1.2, 1.2), xlabel = raw"FDTD calls", ylabel = L"H$_y$")
+ax2.set(xlim = (0, 200), ylim = (-1.2, 1.2), xlabel = raw"FDTD cells", ylabel = L"H$_y$")
 ax2.set(xticks = 0:20:200, yticks = -1:1:1.2)
 plt.subplots_adjust(bottom = 0.2, hspace = 0.45)
 plt.savefig("fd1d_1_1.png")
