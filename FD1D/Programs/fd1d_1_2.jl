@@ -2,6 +2,7 @@
 # File: fd1d_1_2.jl
 # Name: D.Saravanan
 # Date: 19/10/2021
+
 """ Simulation of a pulse with absorbing boundary conditions """
 
 import PyPlot
