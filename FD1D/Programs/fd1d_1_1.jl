@@ -16,7 +16,7 @@ plt.rc("axes", labelsize = 10, titlesize = 10)
 plt.rc("figure", titlesize = 10)
 using LaTeXStrings
 
-ke = 201
+ke = 202
 ex = zeros(ke)
 hy = zeros(ke)
 
