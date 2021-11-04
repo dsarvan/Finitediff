@@ -7,11 +7,11 @@
 
 import PyPlot
 const plt = PyPlot
+plt.rc("text", usetex = "True")
 plt.rc("pgf", texsystem = "pdflatex")
 plt.rc("font", family = "serif", weight = "normal", size = 8)
 plt.rc("axes", labelsize = 10, titlesize = 10)
 plt.rc("figure", titlesize = 10)
-plt.rc("text", usetex = "True")
 using LaTeXStrings
 
 ke = 201
@@ -45,7 +45,7 @@ end
 fig, (ax1, ax2) = plt.subplots(2)
 fig.suptitle(raw"FDTD simulation of a pulse in free space after 100 time steps")
 ax1.plot(ex, "k", lw = 1)
-ax1.text(100, 0.5, "T = 100", horizontalalignment = "center")
+ax1.text(100, 0.5, "T = $nsteps", horizontalalignment = "center")
 ax1.set(xlim = (0, 200), ylim = (-1.2, 1.2), ylabel = L"E$_x$")
 ax1.set(xticks = 0:20:200, yticks = -1:1:1.2)
 ax2.plot(hy, "k", lw = 1)
