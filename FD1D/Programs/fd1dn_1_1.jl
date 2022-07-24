@@ -16,7 +16,7 @@ plt.rc("axes", labelsize = 10, titlesize = 10)
 plt.rc("figure", titlesize = 10)
 using LaTeXStrings
 
-function plotting(time_step, ex, hy)
+function plotting(nsteps, ex, hy)
     """plot function"""
     fig, (ax1, ax2) = plt.subplots(2)
     fig.suptitle(raw"FDTD simulation of a pulse in free space after 100 time steps")
@@ -57,6 +57,8 @@ function main()
         hy[1:ke-1] = hy[1:ke-1] + 0.5 * (ex[1:ke-1] - ex[2:ke])
 
     end
+
+    plotting(nsteps, ex, hy)
 
 end
 
